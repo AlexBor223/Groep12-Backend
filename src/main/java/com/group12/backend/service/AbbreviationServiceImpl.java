@@ -37,4 +37,24 @@ public class AbbreviationServiceImpl implements AbbreviationService{
             throw new ResourceNotFoundException("Abbreviation", "id", id);
         }
     }
+
+    @Override
+    public Abbreviation updateAbbreviation(Abbreviation abbreviation, long id) {
+        //Check wether abbreviation exists in db
+        Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "id", id));
+        existingAbbreviation.setLetters(abbreviation.getLetters());
+        existingAbbreviation.setMeaning(abbreviation.getMeaning());
+        //Save to db
+        abbreviationRepository.save(existingAbbreviation);
+        return existingAbbreviation;
+    }
+
+    @Override
+    public void deleteAbbreviation(long id) {
+        //Check wether abbreviation exists in db
+        abbreviationRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Abbreviation", "Id", id));
+        abbreviationRepository.deleteById(id);
+    }
 }

@@ -12,11 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/abbreviations")
 public class AbbreviationController {
-
+    //TODO add the api part in requestmapping to properties
     private AbbreviationService abbreviationService;
 
     public AbbreviationController(AbbreviationService abbreviationService){
-        super();
         this.abbreviationService = abbreviationService;
     }
 
@@ -32,9 +31,23 @@ public class AbbreviationController {
         return abbreviationService.getAllAbbreviations();
     }
 
-    //REST API get one specific abbreviation. /api/abbreviations/1
+    //REST API get one specific abbreviation. URI: /api/abbreviations/1
     @GetMapping("{id}")
     public ResponseEntity<Abbreviation> getAbbrevationById(@PathVariable("id") long abbreviationId){
         return new ResponseEntity<Abbreviation>(abbreviationService.getAbbreviationById(abbreviationId), HttpStatus.OK);
     }
+
+    //REST API build an update for one abbreviation. URI: /api/abbreviations/1
+    @PutMapping("{id}")
+    public ResponseEntity<Abbreviation> updateAbbreviation(@PathVariable("id") long id, @RequestBody Abbreviation abbreviation){
+        return new ResponseEntity<Abbreviation>(abbreviationService.updateAbbreviation(abbreviation, id), HttpStatus.OK);
+    }
+
+    //REST API delete on abbreviation URI: /api/abbreviations/1
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteAbbreviation(@PathVariable("id") long id){
+        abbreviationService.deleteAbbreviation(id);
+        return new ResponseEntity<String>("Abbreviation deletion successful", HttpStatus.OK);
+    }
+
 }
