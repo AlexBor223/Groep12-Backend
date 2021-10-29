@@ -1,6 +1,5 @@
 package com.group12.backend.service;
 
-import com.group12.backend.DAO.AbbreviationDao;
 import com.group12.backend.exception.ResourceNotFoundException;
 import com.group12.backend.model.Abbreviation;
 import com.group12.backend.repository.AbbreviationRepository;
@@ -13,12 +12,9 @@ import java.util.Optional;
 public class AbbreviationServiceImpl implements AbbreviationService{
 
     private AbbreviationRepository abbreviationRepository;
-    private AbbreviationDao abbreviationDao;
 
-    public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository, AbbreviationDao abbreviationDao) {
-        super();
+    public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository) {
         this.abbreviationRepository = abbreviationRepository;
-        this.abbreviationDao = abbreviationDao;
     }
 
     @Override
@@ -28,12 +24,12 @@ public class AbbreviationServiceImpl implements AbbreviationService{
 
     @Override
     public List<Abbreviation> getAllAbbreviations() {
-        return abbreviationDao.getAll();
+        return abbreviationRepository.findAll();
     }
 
     @Override
     public Abbreviation getAbbreviationById(long id){
-        Optional<Abbreviation> abbreviation = abbreviationDao.get(id);
+        Optional<Abbreviation> abbreviation = abbreviationRepository.findById(id);
         if (abbreviation.isPresent()){
             return abbreviation.get();
         }
