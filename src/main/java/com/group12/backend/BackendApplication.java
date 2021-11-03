@@ -17,10 +17,6 @@ public class BackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode("yourplaintextpassword");
-
-		System.out.println(encodedPassword);
 	}
 
 	@Bean
