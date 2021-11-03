@@ -72,7 +72,7 @@ public class Abbreviation {
 
     public void giveDislike(){ likes--; }
 
-    public void acceptAbbreviation(){ accepted = true; }
+    private void acceptAbbreviation(){ accepted = true; }
 
     @Override
     public boolean equals(Object o) {

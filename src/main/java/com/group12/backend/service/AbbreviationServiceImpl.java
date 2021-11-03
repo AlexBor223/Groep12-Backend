@@ -61,17 +61,19 @@ public class AbbreviationServiceImpl implements AbbreviationService{
     @Override
     public void likeAbbreviation(long id){
         //Check whether abbreviation exists in db
-        abbreviationRepository.findById(id).orElseThrow(()->
-        new ResourceNotFoundException("Abbreviation", "Id", id));
-        abbreviationRepository.getById(id).giveLike();
+        Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "id", id));
+        existingAbbreviation.giveLike();
+        abbreviationRepository.save(existingAbbreviation);
     }
 
     @Override
     public void dislikeAbbreviation(long id){
         //Check whether abbreviation exists in db
-        abbreviationRepository.findById(id).orElseThrow(()->
-                new ResourceNotFoundException("Abbreviation", "Id", id));
-        abbreviationRepository.getById(id).giveDislike();
+        Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "id", id));
+        existingAbbreviation.giveDislike();
+        abbreviationRepository.save(existingAbbreviation);
     }
 
 }
