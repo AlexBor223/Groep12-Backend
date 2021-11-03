@@ -43,7 +43,7 @@ public class UserResourceController {
     }
 
 }
-
+//TODO put in standalone class
 class RoleToUserForm{
     private String username;
     private String roleName;

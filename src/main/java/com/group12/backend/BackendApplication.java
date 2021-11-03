@@ -17,18 +17,17 @@ public class BackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode("yourplaintextpassword");
+
+		System.out.println(encodedPassword);
 	}
 
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
-
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
+//CREEER DE GEBRUIKERS (ALLEEN EEN KEER DRAAIEN DAARNA UITCOMMENTEN)
 //	@Bean
 //	CommandLineRunner run(UserService userService){
 //		return args -> {
