@@ -7,12 +7,14 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     //name of the role: Admin
     private String name;
 
-    public Role(){}
+    public Role() {
+    }
 
     public Role(Long id, String name) {
         this.id = id;

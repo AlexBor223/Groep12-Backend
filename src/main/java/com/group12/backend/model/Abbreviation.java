@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="abbreviation")
+@Table(name = "abbreviation")
 public class Abbreviation {
 
     @Id
@@ -17,7 +17,7 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
-    public Abbreviation(){
+    public Abbreviation() {
 
     }
 

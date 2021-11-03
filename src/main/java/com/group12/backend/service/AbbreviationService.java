@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface AbbreviationService {
     Abbreviation saveAbbreviation(Abbreviation abbreviation);
+
     List<Abbreviation> getAllAbbreviations();
+
     Abbreviation getAbbreviationById(long id);
+
     Abbreviation updateAbbreviation(Abbreviation abbreviation, long id);
+
     void deleteAbbreviation(long id);
 }

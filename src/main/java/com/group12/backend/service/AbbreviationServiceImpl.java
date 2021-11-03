@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AbbreviationServiceImpl implements AbbreviationService{
+public class AbbreviationServiceImpl implements AbbreviationService {
 
     private AbbreviationRepository abbreviationRepository;
 
@@ -28,12 +28,11 @@ public class AbbreviationServiceImpl implements AbbreviationService{
     }
 
     @Override
-    public Abbreviation getAbbreviationById(long id){
+    public Abbreviation getAbbreviationById(long id) {
         Optional<Abbreviation> abbreviation = abbreviationRepository.findById(id);
-        if (abbreviation.isPresent()){
+        if (abbreviation.isPresent()) {
             return abbreviation.get();
-        }
-        else {
+        } else {
             throw new ResourceNotFoundException("Abbreviation", "id", id);
         }
     }

@@ -7,7 +7,8 @@ import java.util.Objects;
 
 @Entity
 public class AppUser {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     //email kan in java gerepresenteerd worden als string

@@ -15,14 +15,14 @@ import java.util.ArrayList;
 @SpringBootApplication
 public class BackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BackendApplication.class, args);
+    }
 
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 //CREEER DE GEBRUIKERS (ALLEEN EEN KEER DRAAIEN DAARNA UITCOMMENTEN)
 //	@Bean
 //	CommandLineRunner run(UserService userService){
