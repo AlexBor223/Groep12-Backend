@@ -33,7 +33,7 @@ public class AbbreviationController {
 
     //REST API get one specific abbreviation. URI: /api/abbreviations/1
     @GetMapping("{id}")
-    public ResponseEntity<Abbreviation> getAbbrevationById(@PathVariable("id") long abbreviationId){
+    public ResponseEntity<Abbreviation> getAbbreviationById(@PathVariable("id") long abbreviationId){
         return new ResponseEntity<Abbreviation>(abbreviationService.getAbbreviationById(abbreviationId), HttpStatus.OK);
     }
 
@@ -48,6 +48,17 @@ public class AbbreviationController {
     public ResponseEntity<String> deleteAbbreviation(@PathVariable("id") long id){
         abbreviationService.deleteAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation deletion successful", HttpStatus.OK);
+    }
+    //REST api give like to abbreviation
+    @PostMapping("{id}/GiveLike")
+    public ResponseEntity<String> likeAbbreviation(@PathVariable("id") long id){
+        abbreviationService.likeAbbreviation(id);
+        return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
+    }
+    @PostMapping("{id}/GivedisLike")
+    public ResponseEntity<String> dislikeAbbreviation(@PathVariable("id") long id){
+        abbreviationService.likeAbbreviation(id);
+        return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
     }
 
 }

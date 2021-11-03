@@ -17,6 +17,13 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
+    @Column(name = "likes", nullable = false)
+    private int likes= 0;
+
+    @Column(name = "accepted", nullable = false)
+    private Boolean accepted = false;
+
+
     public Abbreviation(){
 
     }
@@ -56,6 +63,18 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
+    public void giveLike(){
+        likes++;
+    }
+
+    public void giveDislike(){
+        likes--;
+    }
+
+    public void acceptAbbreviation(){
+        accepted = true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,4 +96,6 @@ public class Abbreviation {
                 ", meaning='" + meaning + '\'' +
                 '}';
     }
+
+
 }

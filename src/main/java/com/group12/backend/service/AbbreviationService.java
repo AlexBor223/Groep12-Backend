@@ -10,4 +10,6 @@ public interface AbbreviationService {
     Abbreviation getAbbreviationById(long id);
     Abbreviation updateAbbreviation(Abbreviation abbreviation, long id);
     void deleteAbbreviation(long id);
+    void likeAbbreviation(long id);
+    void dislikeAbbreviation(long id);
 }

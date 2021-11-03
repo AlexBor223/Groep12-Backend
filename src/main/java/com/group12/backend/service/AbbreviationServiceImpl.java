@@ -57,4 +57,19 @@ public class AbbreviationServiceImpl implements AbbreviationService{
                 new ResourceNotFoundException("Abbreviation", "Id", id));
         abbreviationRepository.deleteById(id);
     }
+
+    @Override
+    public void likeAbbreviation(long id){
+        abbreviationRepository.findById(id).orElseThrow(()->
+        new ResourceNotFoundException("Abbreviation", "Id", id));
+        abbreviationRepository.getById(id).giveLike();
+    }
+
+    @Override
+    public void dislikeAbbreviation(long id){
+        abbreviationRepository.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("Abbreviation", "Id", id));
+        abbreviationRepository.getById(id).giveDislike();
+    }
+
 }
