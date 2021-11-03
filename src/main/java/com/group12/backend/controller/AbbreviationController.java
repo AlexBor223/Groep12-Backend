@@ -55,7 +55,7 @@ public class AbbreviationController {
         abbreviationService.likeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
     }
-    @PostMapping("{id}/GivedisLike")
+    @PostMapping("{id}/GiveDisLike")
     public ResponseEntity<String> dislikeAbbreviation(@PathVariable("id") long id){
         abbreviationService.likeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);

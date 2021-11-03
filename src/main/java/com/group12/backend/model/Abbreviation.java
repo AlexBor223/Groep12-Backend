@@ -65,15 +65,14 @@ public class Abbreviation {
 
     public void giveLike(){
         likes++;
+        if(likes>3){
+            acceptAbbreviation();
+        }
     }
 
-    public void giveDislike(){
-        likes--;
-    }
+    public void giveDislike(){ likes--; }
 
-    public void acceptAbbreviation(){
-        accepted = true;
-    }
+    public void acceptAbbreviation(){ accepted = true; }
 
     @Override
     public boolean equals(Object o) {
