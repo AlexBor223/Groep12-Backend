@@ -28,6 +28,7 @@ public class AbbreviationController {
     //REST API get all abbreviations.
     @GetMapping
     public List<Abbreviation> getAllAbbreviations(){
+        System.out.println(abbreviationService.getAllAbbreviations().get(0).getDepartment());
         return abbreviationService.getAllAbbreviations();
     }
 

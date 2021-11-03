@@ -17,11 +17,14 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
+    @Column(name = "department", nullable= false)
+    private String department;
+
     @Column(name = "likes", nullable = false)
     private int likes= 0;
 
-    @Column(name = "accepted", nullable = false)
-    private Boolean accepted = false;
+    @Column(name = "approved", nullable = false)
+    private Boolean approved = false;
 
 
     public Abbreviation(){
@@ -63,6 +66,18 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
     public void giveLike(){
         likes++;
         if(likes>3){
@@ -72,7 +87,7 @@ public class Abbreviation {
 
     public void giveDislike(){ likes--; }
 
-    private void acceptAbbreviation(){ accepted = true; }
+    private void acceptAbbreviation(){ approved = true; }
 
     @Override
     public boolean equals(Object o) {
@@ -93,8 +108,12 @@ public class Abbreviation {
                 "id=" + id +
                 ", letters='" + letters + '\'' +
                 ", meaning='" + meaning + '\'' +
+                ", department='" + department + '\'' +
+                ", approved='" + approved + '\'' +
                 '}';
     }
+
+
 
 
 }
