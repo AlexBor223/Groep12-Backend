@@ -73,6 +73,11 @@ public class AbbreviationServiceImpl implements AbbreviationService{
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "id", id));
         existingAbbreviation.giveDislike();
+        if (existingAbbreviation.getLikes() < - 9) {
+            deleteAbbreviation(id);
+
+            return;
+        }
         abbreviationRepository.save(existingAbbreviation);
     }
 

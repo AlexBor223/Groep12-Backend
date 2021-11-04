@@ -78,6 +78,15 @@ public class Abbreviation {
         return approved;
     }
 
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
     public void giveLike(){
         likes++;
         if(likes>3){
@@ -85,7 +94,13 @@ public class Abbreviation {
         }
     }
 
-    public void giveDislike(){ likes--; }
+
+
+    public void giveDislike(){
+        likes--;
+
+    }
+
 
     private void acceptAbbreviation(){ approved = true; }
 
@@ -94,7 +109,7 @@ public class Abbreviation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Abbreviation abbreviation = (Abbreviation) o;
-        return id == abbreviation.id && Objects.equals(letters, abbreviation.letters) && Objects.equals(meaning, abbreviation.meaning);
+        return id == abbreviation.id && Objects.equals(letters, abbreviation.letters) && Objects.equals(meaning, abbreviation.meaning) && Objects.equals(department, abbreviation.department) && Objects.equals(likes, abbreviation.likes) && Objects.equals(approved, abbreviation.approved);
     }
 
     @Override
@@ -110,10 +125,10 @@ public class Abbreviation {
                 ", meaning='" + meaning + '\'' +
                 ", department='" + department + '\'' +
                 ", approved='" + approved + '\'' +
+                ", likes='" + likes + '\'' +
+                ", test='" + "likes" + '\'' +
                 '}';
     }
-
-
 
 
 }
