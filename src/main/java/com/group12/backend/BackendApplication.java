@@ -28,12 +28,14 @@ public class BackendApplication {
 //	CommandLineRunner run(UserService userService){
 //		return args -> {
 //			userService.saveRole(new Role(null, "ROLE_ADMIN"));
+//			userService.saveRole(new Role(null, "ROLE_USER"));
 //
 //			userService.saveUser(new AppUser(null, "Johhny the abbreviation guy", "John", "1245", new ArrayList<>()));
 //			userService.saveUser(new AppUser(null, "William jackson", "William", "1245", new ArrayList<>()));
 //			userService.saveUser(new AppUser(null, "Leonard Bell", "Leonard", "1245", new ArrayList<>()));
 //
 //			userService.addRoleToUser("Leonard", "ROLE_ADMIN");
+//			userService.addRoleToUser("Leonard", "ROLE_USER");
 //			userService.addRoleToUser("William", "ROLE_ADMIN");
 //			userService.addRoleToUser("John", "ROLE_ADMIN");
 //		};
