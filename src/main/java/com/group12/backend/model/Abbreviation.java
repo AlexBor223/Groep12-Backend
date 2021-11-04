@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "abbreviation")
+@Table(name="attributes")
 public class Abbreviation {
 
     @Id
@@ -17,7 +17,17 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
-    public Abbreviation() {
+    @Column(name = "department", nullable= false)
+    private String department;
+
+    @Column(name = "likes", nullable = false)
+    private int likes= 0;
+
+    @Column(name = "approved", nullable = false)
+    private Boolean approved = false;
+
+
+    public Abbreviation(){
 
     }
 
@@ -56,6 +66,44 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void giveLike(){
+        likes++;
+        if(likes>3){
+            acceptAbbreviation();
+        }
+    }
+
+
+
+    public void giveDislike(){
+        likes--;
+
+    }
+
+
+    private void acceptAbbreviation(){ approved = true; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,6 +123,12 @@ public class Abbreviation {
                 "id=" + id +
                 ", letters='" + letters + '\'' +
                 ", meaning='" + meaning + '\'' +
+                ", department='" + department + '\'' +
+                ", approved='" + approved + '\'' +
+                ", likes='" + likes + '\'' +
+                ", test='" + "likes" + '\'' +
                 '}';
     }
+
+
 }

@@ -39,7 +39,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
 
     @Override
     public Abbreviation updateAbbreviation(Abbreviation abbreviation, long id) {
-        //Check wether abbreviation exists in db
+        //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "id", id));
         existingAbbreviation.setLetters(abbreviation.getLetters());
@@ -51,9 +51,33 @@ public class AbbreviationServiceImpl implements AbbreviationService {
 
     @Override
     public void deleteAbbreviation(long id) {
-        //Check wether abbreviation exists in db
+        //Check whether abbreviation exists in db
         abbreviationRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Abbreviation", "Id", id));
         abbreviationRepository.deleteById(id);
     }
+
+    @Override
+    public void likeAbbreviation(long id){
+        //Check whether abbreviation exists in db
+        Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "id", id));
+        existingAbbreviation.giveLike();
+        abbreviationRepository.save(existingAbbreviation);
+    }
+
+    @Override
+    public void dislikeAbbreviation(long id){
+        //Check whether abbreviation exists in db
+        Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "id", id));
+        existingAbbreviation.giveDislike();
+        if (existingAbbreviation.getLikes() < - 9) {
+            deleteAbbreviation(id);
+
+            return;
+        }
+        abbreviationRepository.save(existingAbbreviation);
+    }
+
 }
