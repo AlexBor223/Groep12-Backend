@@ -17,7 +17,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(long id){
+    public Department getDepartmentById(long id) {
         Optional<Department> department = departmentRepository.findById(id);
 
         if (department.isPresent())

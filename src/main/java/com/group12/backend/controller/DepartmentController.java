@@ -18,17 +18,17 @@ public class DepartmentController {
     }
 
     @PostMapping()
-    public ResponseEntity<Department> saveDepartment(@RequestBody Department department){
+    public ResponseEntity<Department> saveDepartment(@RequestBody Department department) {
         return new ResponseEntity<>(departmentService.saveDepartment(department), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Department> getAllDepartments(){
+    public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id){
+    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id) {
         return new ResponseEntity<>(departmentService.getDepartmentById(id), HttpStatus.OK);
     }
 }

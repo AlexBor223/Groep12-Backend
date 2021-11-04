@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="attributes")
+@Table(name = "attributes")
 public class Abbreviation {
 
     @Id
@@ -17,17 +17,17 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
-    @Column(name = "department", nullable= false)
+    @Column(name = "department", nullable = false)
     private String department;
 
     @Column(name = "likes", nullable = false)
-    private int likes= 0;
+    private int likes = 0;
 
     @Column(name = "approved", nullable = false)
     private Boolean approved = false;
 
 
-    public Abbreviation(){
+    public Abbreviation() {
 
     }
 
@@ -87,22 +87,23 @@ public class Abbreviation {
         this.likes = likes;
     }
 
-    public void giveLike(){
+    public void giveLike() {
         likes++;
-        if(likes>3){
+        if (likes > 3) {
             acceptAbbreviation();
         }
     }
 
 
-
-    public void giveDislike(){
+    public void giveDislike() {
         likes--;
 
     }
 
 
-    private void acceptAbbreviation(){ approved = true; }
+    private void acceptAbbreviation() {
+        approved = true;
+    }
 
     @Override
     public boolean equals(Object o) {

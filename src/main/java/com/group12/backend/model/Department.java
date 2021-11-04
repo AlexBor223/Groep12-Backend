@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="attributes")
+@Table(name = "attributes")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,8 @@ public class Department {
     @Column(name = "letters", nullable = false)
     private String letters;
 
-    public Department() {}
+    public Department() {
+    }
 
     public Department(String name, String letters) {
         this.name = name;
@@ -32,6 +33,7 @@ public class Department {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -39,6 +41,7 @@ public class Department {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -46,6 +49,7 @@ public class Department {
     public String getLetters() {
         return letters;
     }
+
     public void setLetters(String letters) {
         this.letters = letters;
     }

@@ -58,7 +58,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     }
 
     @Override
-    public void likeAbbreviation(long id){
+    public void likeAbbreviation(long id) {
         //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "id", id));
@@ -67,12 +67,12 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     }
 
     @Override
-    public void dislikeAbbreviation(long id){
+    public void dislikeAbbreviation(long id) {
         //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "id", id));
         existingAbbreviation.giveDislike();
-        if (existingAbbreviation.getLikes() < - 9) {
+        if (existingAbbreviation.getLikes() < -9) {
             deleteAbbreviation(id);
 
             return;
