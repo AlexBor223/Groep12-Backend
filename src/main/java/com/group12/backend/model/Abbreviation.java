@@ -2,9 +2,10 @@ package com.group12.backend.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "attributes")
+@Table(name = "Abbreviation")
 public class Abbreviation {
 
     @Id
@@ -17,15 +18,15 @@ public class Abbreviation {
     @Column(name = "meaning", nullable = false)
     private String meaning;
 
-    @Column(name = "department", nullable = false)
-    private String department;
-
     @Column(name = "likes", nullable = false)
     private int likes = 0;
 
     @Column(name = "approved", nullable = false)
     private Boolean approved = false;
 
+    @ManyToOne
+    @JoinColumn(name="department_id", nullable=true)
+    private Department department;
 
     public Abbreviation() {
 
@@ -66,12 +67,25 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
-    public String getDepartment() {
+//    public String getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(String department) {
+//        this.department = department;
+//    }
+
+
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 
     public Boolean getApproved() {

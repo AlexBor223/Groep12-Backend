@@ -2,9 +2,10 @@ package com.group12.backend.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "attributes")
+@Table(name = "Department")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +16,9 @@ public class Department {
 
     @Column(name = "letters", nullable = false)
     private String letters;
+
+    @OneToMany(mappedBy="department")
+    private Set<Abbreviation> abbreviations;
 
     public Department() {
     }
@@ -28,6 +32,14 @@ public class Department {
         this.id = id;
         this.name = name;
         this.letters = letters;
+    }
+
+    public Set<Abbreviation> getAbbreviations() {
+        return abbreviations;
+    }
+
+    public void setAbbreviations(Set<Abbreviation> abbreviations) {
+        this.abbreviations = abbreviations;
     }
 
     public long getId() {
@@ -70,10 +82,11 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Attribute{" +
+        return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", letters='" + letters + '\'' +
+                ", abbreviations=" + abbreviations +
                 '}';
     }
 }
