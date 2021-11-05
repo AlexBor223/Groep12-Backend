@@ -15,18 +15,17 @@ public class TempAbbreviation {
 
 
 
+        public long id;
+
+        public String letters;
+
+        public String meaning;
 
 
-        private long id;
-
-        private String letters;
-
-        private String meaning;
-
-        private Boolean approved = false;
+        public Boolean approved = false;
 
         @JsonProperty("departmentId")
-        private long departmentId;
+        public long departmentId;
 
 
         public TempAbbreviation(Abbreviation abbreviation){
@@ -36,6 +35,7 @@ public class TempAbbreviation {
             approved = abbreviation.getApproved();
             departmentId = abbreviation.getDepartment().getId();
         }
+        public TempAbbreviation(){}
 
         public long getId() {
             return id;
@@ -64,8 +64,6 @@ public class TempAbbreviation {
         public long getDepartment() {
             return departmentId;
         }
-
-
 
 
 
