@@ -61,6 +61,12 @@ public class AbbreviationServiceImpl implements AbbreviationService {
             } else if (areAllNotNull(department) && areAllNull(letters, meaning)) {
                 if (departmentIsIdentical)
                     filteredAbbreviations.add(abbreviation);
+            } else if (areAllNotNull(letters) && areAllNull(meaning, department)) {
+                if (lettersIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (areAllNotNull(meaning) && areAllNull(letters, department)) {
+                if (meaningIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
             }
         }
 
