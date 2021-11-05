@@ -34,6 +34,14 @@ public class AbbreviationController {
         return abbreviationService.getAllAbbreviations();
     }
 
+    @GetMapping("filter")
+    public List<Abbreviation> getFilteredAbbreviations(
+            @RequestParam(value = "letters", required = false) String letters,
+            @RequestParam(value = "meaning", required = false) String meaning,
+            @RequestParam(value = "department", required = false) String department) {
+        return abbreviationService.getFilteredAbbreviations(letters, meaning, department);
+    }
+
     //REST API get one specific abbreviation. URI: /api/abbreviations/1
     @GetMapping("{id}")
     public ResponseEntity<Abbreviation> getAbbreviationById(@PathVariable("id") long abbreviationId) {
@@ -65,5 +73,4 @@ public class AbbreviationController {
         abbreviationService.dislikeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
     }
-
 }
