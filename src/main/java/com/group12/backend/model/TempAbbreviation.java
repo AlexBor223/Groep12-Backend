@@ -3,15 +3,18 @@ package com.group12.backend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.*;
 
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 
-    public class TempAbbreviation {
+public class TempAbbreviation {
+
+
+
 
 
         private long id;
@@ -25,6 +28,14 @@ import java.util.Set;
         @JsonProperty("departmentId")
         private long departmentId;
 
+
+        public TempAbbreviation(Abbreviation abbreviation){
+            id =abbreviation.getId();
+            letters = abbreviation.getLetters();
+            meaning = abbreviation.getMeaning();
+            approved = abbreviation.getApproved();
+            departmentId = abbreviation.getDepartment().getId();
+        }
 
         public long getId() {
             return id;
@@ -50,22 +61,12 @@ import java.util.Set;
             this.meaning = meaning;
         }
 
-//    public String getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(String department) {
-//        this.department = department;
-//    }
-
-
         public long getDepartment() {
             return departmentId;
         }
 
-        public Boolean getApproved() {
-            return approved;
-        }
+
+
 
 
 

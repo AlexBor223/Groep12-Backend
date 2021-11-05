@@ -1,10 +1,14 @@
 package com.group12.backend.service;
 
 import com.group12.backend.exception.ResourceNotFoundException;
+import com.group12.backend.model.Abbreviation;
 import com.group12.backend.model.Department;
+import com.group12.backend.model.TempAbbreviation;
+import com.group12.backend.model.TempDepartment;
 import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +36,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
+    public List<TempDepartment> getAllDepartments() {
+
+        return depListToTDepList(departmentRepository.findAll());
+    }
+
+
+    private  List<TempDepartment> depListToTDepList(List<Department> Departments){
+        List<TempDepartment> newList = new ArrayList<TempDepartment>(Departments.size());
+
+        for (Department abr : Departments) {
+            newList.add(new TempDepartment(abr));
+        }
+        return newList;
     }
 }

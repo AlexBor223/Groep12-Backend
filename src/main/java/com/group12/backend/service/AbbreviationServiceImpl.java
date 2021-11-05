@@ -8,6 +8,7 @@ import com.group12.backend.repository.AbbreviationRepository;
 import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +33,10 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     }
 
     @Override
-    public List<Abbreviation> getAllAbbreviations() {
-        return abbreviationRepository.findAll();
+    public List<TempAbbreviation> getAllAbbreviations() {
+
+
+        return abrListToTAbrList(abbreviationRepository.findAll());
     }
 
     @Override
@@ -87,6 +90,15 @@ public class AbbreviationServiceImpl implements AbbreviationService {
             return;
         }
         abbreviationRepository.save(existingAbbreviation);
+    }
+
+    private  List<TempAbbreviation> abrListToTAbrList(List<Abbreviation> abbreviations){
+        List<TempAbbreviation> newList = new ArrayList<TempAbbreviation>(abbreviations.size());
+
+        for (Abbreviation abr : abbreviations) {
+            newList.add(new TempAbbreviation(abr));
+        }
+        return newList;
     }
 
 }

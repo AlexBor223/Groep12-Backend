@@ -9,7 +9,7 @@ import java.util.List;
 public interface AbbreviationService {
     void saveAbbreviation(TempAbbreviation abbreviation);
 
-    List<Abbreviation> getAllAbbreviations();
+    List<TempAbbreviation> getAllAbbreviations();
 
     Abbreviation getAbbreviationById(long id);
 

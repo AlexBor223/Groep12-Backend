@@ -30,7 +30,7 @@ public class AbbreviationController {
 
     //REST API get all abbreviations.
     @GetMapping
-    public List<Abbreviation> getAllAbbreviations() {
+    public List<TempAbbreviation> getAllAbbreviations() {
         return abbreviationService.getAllAbbreviations();
     }
 
