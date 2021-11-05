@@ -66,6 +66,10 @@ public class Department {
         this.letters = letters;
     }
 
+    public void addAbbreviation(Abbreviation abbreviation){
+        abbreviations.add(abbreviation);
+    }
+
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;

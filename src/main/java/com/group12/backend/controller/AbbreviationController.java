@@ -2,6 +2,7 @@ package com.group12.backend.controller;
 
 import com.group12.backend.model.Abbreviation;
 import com.group12.backend.model.Department;
+import com.group12.backend.model.TempAbbreviation;
 import com.group12.backend.service.AbbreviationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,8 @@ public class AbbreviationController {
 
     //REST API create abbreviation.
     @PostMapping()
-    public ResponseEntity<Abbreviation> saveAbbreviation(@RequestBody Abbreviation abbreviation, Department department) {
+    public ResponseEntity<Abbreviation> saveAbbreviation(@RequestBody TempAbbreviation abbreviation) {
+
         return new ResponseEntity<Abbreviation>(abbreviationService.saveAbbreviation(abbreviation), HttpStatus.CREATED);
     }
 

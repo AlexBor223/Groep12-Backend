@@ -38,6 +38,13 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
+    public Abbreviation(TempAbbreviation tempAbbreviation, Department insertdepartment){
+        id= tempAbbreviation.getId();
+        letters= tempAbbreviation.getLetters();
+        meaning= tempAbbreviation.getMeaning();
+        department = insertdepartment;
+    }
+
     public Abbreviation(String letters, String meaning) {
         this.letters = letters;
         this.meaning = meaning;
