@@ -7,7 +7,7 @@ import com.group12.backend.model.TempAbbreviation;
 import java.util.List;
 
 public interface AbbreviationService {
-    Abbreviation saveAbbreviation(TempAbbreviation abbreviation);
+    void saveAbbreviation(TempAbbreviation abbreviation);
 
     List<Abbreviation> getAllAbbreviations();
 

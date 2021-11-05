@@ -1,5 +1,7 @@
 package com.group12.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -18,11 +20,10 @@ import java.util.Set;
 
         private String meaning;
 
-        private int likes = 0;
-
         private Boolean approved = false;
 
-        private int department_id;
+        @JsonProperty("departmentId")
+        private long departmentId;
 
 
         public long getId() {
@@ -58,26 +59,14 @@ import java.util.Set;
 //    }
 
 
-        public int getDepartment() {
-            return department_id;
+        public long getDepartment() {
+            return departmentId;
         }
 
         public Boolean getApproved() {
             return approved;
         }
 
-
-        public int getLikes() {
-            return likes;
-        }
-
-        public void setLikes(int likes) {
-            this.likes = likes;
-        }
-
-        private void acceptAbbreviation() {
-            approved = true;
-        }
 
 
     }

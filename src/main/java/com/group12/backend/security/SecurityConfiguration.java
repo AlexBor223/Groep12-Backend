@@ -43,19 +43,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(GET, "/api/abbreviations/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations/DisLike").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations/Like").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/abbreviations").permitAll();
+
 
         http.authorizeRequests().antMatchers(GET, "/api/users").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/user/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/role/**").hasAnyAuthority("ROLE_ADMIN");
 
-        http.authorizeRequests().antMatchers(POST, "/api/abbreviations").permitAll();
+
         http.authorizeRequests().antMatchers(PUT, "/api/abbreviations/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/abbreviations/**").hasAnyAuthority("ROLE_ADMIN");
 
         http.authorizeRequests().antMatchers(POST, "/api/departments").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/departments").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers(POST, "/api/abbreviations").permitAll();
+//        http.authorizeRequests().anyRequest().authenticated();
 
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

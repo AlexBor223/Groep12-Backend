@@ -23,13 +23,12 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     }
 
     @Override
-    public Abbreviation saveAbbreviation(TempAbbreviation tempAbbreviation) {
-        long id = tempAbbreviation.getDepartment();
-        Department department = departmentRepository.getById(id);
-        Abbreviation abbreviation = new Abbreviation(tempAbbreviation, department);
-
+    public void saveAbbreviation(TempAbbreviation tempAbbreviation) {
+        Abbreviation abbreviation = new Abbreviation(tempAbbreviation, departmentRepository.getById(tempAbbreviation.getDepartment()));
+        Department department = departmentRepository.getById(tempAbbreviation.getDepartment());
         department.addAbbreviation(abbreviation);
-        return abbreviationRepository.save(abbreviation);
+        departmentRepository.save(department);
+        abbreviationRepository.save(abbreviation);
     }
 
     @Override

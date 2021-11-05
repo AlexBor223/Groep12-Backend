@@ -23,9 +23,9 @@ public class AbbreviationController {
 
     //REST API create abbreviation.
     @PostMapping()
-    public ResponseEntity<Abbreviation> saveAbbreviation(@RequestBody TempAbbreviation abbreviation) {
-
-        return new ResponseEntity<Abbreviation>(abbreviationService.saveAbbreviation(abbreviation), HttpStatus.CREATED);
+    public ResponseEntity<String> saveAbbreviation(@RequestBody TempAbbreviation abbreviation) {
+         abbreviationService.saveAbbreviation(abbreviation);
+         return new ResponseEntity<>("abbreviation added", HttpStatus.OK);
     }
 
     //REST API get all abbreviations.
