@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 @Service
 public class AbbreviationServiceImpl implements AbbreviationService {
-
     private AbbreviationRepository abbreviationRepository;
 
     public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository) {
