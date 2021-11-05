@@ -5,8 +5,8 @@ import com.group12.backend.model.Abbreviation;
 import com.group12.backend.repository.AbbreviationRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class AbbreviationServiceImpl implements AbbreviationService {
@@ -35,6 +35,37 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         } else {
             throw new ResourceNotFoundException("Abbreviation", "id", id);
         }
+    }
+
+    @Override
+    public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
+        List<Abbreviation> abbreviations = abbreviationRepository.findAll();
+        List<Abbreviation> filteredAbbreviations = new ArrayList<>();
+
+        if (areAllNull(letters, meaning, department))
+            throw new ResourceNotFoundException("Abbreviations", "filter", "All paramaters are null");
+
+        for (Abbreviation abbreviation : abbreviations) {
+            boolean lettersIsIdentical = abbreviation.getLetters().equals(letters);
+            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
+            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
+
+            if (areAllNotNull(letters, meaning, department)) {
+                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (areAllNotNull(meaning, department) && areAllNull(letters)) {
+                if (meaningIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (areAllNotNull(letters, department) && areAllNull(meaning)) {
+                if (lettersIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (areAllNotNull(department) && areAllNull(letters, meaning)) {
+                if (departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            }
+        }
+
+        return filteredAbbreviations;
     }
 
     @Override
@@ -80,4 +111,11 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.save(existingAbbreviation);
     }
 
+    public boolean areAllNull(Object... objects) {
+        return Stream.of(objects).allMatch(Objects::isNull);
+    }
+
+    public boolean areAllNotNull(Object... objects) {
+        return Stream.of(objects).allMatch(Objects::nonNull);
+    }
 }

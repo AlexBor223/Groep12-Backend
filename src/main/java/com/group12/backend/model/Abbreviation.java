@@ -4,9 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "attributes")
+@Table(name = "abbreviations")
 public class Abbreviation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -78,7 +77,6 @@ public class Abbreviation {
         return approved;
     }
 
-
     public int getLikes() {
         return likes;
     }
@@ -97,9 +95,7 @@ public class Abbreviation {
 
     public void giveDislike() {
         likes--;
-
     }
-
 
     private void acceptAbbreviation() {
         approved = true;
@@ -120,7 +116,7 @@ public class Abbreviation {
 
     @Override
     public String toString() {
-        return "Attribute{" +
+        return "Abbreviation{" +
                 "id=" + id +
                 ", letters='" + letters + '\'' +
                 ", meaning='" + meaning + '\'' +
@@ -130,6 +126,4 @@ public class Abbreviation {
                 ", test='" + "likes" + '\'' +
                 '}';
     }
-
-
 }
