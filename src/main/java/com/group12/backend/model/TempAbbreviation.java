@@ -22,7 +22,7 @@ import java.util.Set;
 
         private Boolean approved = false;
 
-        private long department_id;
+        private int department_id;
 
 
         public long getId() {
@@ -58,7 +58,7 @@ import java.util.Set;
 //    }
 
 
-        public long getDepartment() {
+        public int getDepartment() {
             return department_id;
         }
 

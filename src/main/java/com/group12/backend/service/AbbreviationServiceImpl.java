@@ -17,13 +17,15 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     private AbbreviationRepository abbreviationRepository;
     private DepartmentRepository departmentRepository;
 
-    public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository) {
+    public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository, DepartmentRepository departmentRepository) {
         this.abbreviationRepository = abbreviationRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
     public Abbreviation saveAbbreviation(TempAbbreviation tempAbbreviation) {
-        Department department = departmentRepository.getById(tempAbbreviation.getDepartment());
+        long id = tempAbbreviation.getDepartment();
+        Department department = departmentRepository.getById(id);
         Abbreviation abbreviation = new Abbreviation(tempAbbreviation, department);
 
         department.addAbbreviation(abbreviation);
