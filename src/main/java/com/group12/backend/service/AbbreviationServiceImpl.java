@@ -42,7 +42,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         List<Abbreviation> filteredAbbreviations = new ArrayList<>();
 
         if (areAllNull(letters, meaning, department))
-            throw new ResourceNotFoundException("Abbreviations", "filter", "All paramaters are null");
+            throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
 
         for (Abbreviation abbreviation : abbreviations) {
             boolean lettersIsIdentical = abbreviation.getLetters().equals(letters);
