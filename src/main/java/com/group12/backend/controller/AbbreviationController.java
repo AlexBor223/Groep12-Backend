@@ -1,6 +1,8 @@
 package com.group12.backend.controller;
 
 import com.group12.backend.model.Abbreviation;
+import com.group12.backend.model.Department;
+import com.group12.backend.model.TempAbbreviation;
 import com.group12.backend.service.AbbreviationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +23,23 @@ public class AbbreviationController {
 
     //REST API create abbreviation.
     @PostMapping()
-    public ResponseEntity<Abbreviation> saveAbbreviation(@RequestBody Abbreviation abbreviation) {
-        return new ResponseEntity<Abbreviation>(abbreviationService.saveAbbreviation(abbreviation), HttpStatus.CREATED);
+    public ResponseEntity<String> saveAbbreviation(@RequestBody TempAbbreviation abbreviation) {
+         abbreviationService.saveAbbreviation(abbreviation);
+         return new ResponseEntity<>("abbreviation added", HttpStatus.OK);
     }
 
     //REST API get all abbreviations.
     @GetMapping
-    public List<Abbreviation> getAllAbbreviations() {
+    public List<TempAbbreviation> getAllAbbreviations() {
         return abbreviationService.getAllAbbreviations();
+    }
+
+    @GetMapping("filter")
+    public List<TempAbbreviation> getFilteredAbbreviations(
+            @RequestParam(value = "letters", required = false) String letters,
+            @RequestParam(value = "meaning", required = false) String meaning,
+            @RequestParam(value = "department", required = false) String department) {
+        return abbreviationService.getFilteredAbbreviations(letters, meaning, department);
     }
 
     //REST API get one specific abbreviation. URI: /api/abbreviations/1
@@ -62,5 +73,4 @@ public class AbbreviationController {
         abbreviationService.dislikeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
     }
-
 }

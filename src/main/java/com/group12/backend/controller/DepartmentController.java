@@ -1,6 +1,7 @@
 package com.group12.backend.controller;
 
 import com.group12.backend.model.Department;
+import com.group12.backend.model.TempDepartment;
 import com.group12.backend.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,8 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> getAllDepartments() {
+    public List<TempDepartment> getAllDepartments() {
+        System.out.println("test");
         return departmentService.getAllDepartments();
     }
 
