@@ -11,7 +11,7 @@ public interface AbbreviationService {
 
     List<TempAbbreviation> getAllAbbreviations();
 
-    List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department);
+    List<TempAbbreviation> getFilteredAbbreviations(String letters, String meaning, String department);
 
     Abbreviation getAbbreviationById(long id);
 

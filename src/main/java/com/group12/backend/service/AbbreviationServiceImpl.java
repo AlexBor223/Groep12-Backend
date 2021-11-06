@@ -52,18 +52,20 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     }
 
     @Override
-    public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
+    public List<TempAbbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
         List<Abbreviation> abbreviations = abbreviationRepository.findAll();
         List<Abbreviation> filteredAbbreviations = new ArrayList<>();
+        System.out.println(letters+meaning+department);
 
         if (areAllNull(letters, meaning, department))
             throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
 
+
         for (Abbreviation abbreviation : abbreviations) {
-            boolean lettersIsIdentical = abbreviation.getLetters().equals(letters);
+            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
             boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
             boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
-
+            System.out.println("test1");
             if (areAllNotNull(letters, meaning, department)) {
                 if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
                     filteredAbbreviations.add(abbreviation);
@@ -84,8 +86,9 @@ public class AbbreviationServiceImpl implements AbbreviationService {
                     filteredAbbreviations.add(abbreviation);
             }
         }
+        System.out.println("test2");
 
-        return filteredAbbreviations;
+        return abrListToTAbrList(filteredAbbreviations);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class AbbreviationController {
     }
 
     @GetMapping("filter")
-    public List<Abbreviation> getFilteredAbbreviations(
+    public List<TempAbbreviation> getFilteredAbbreviations(
             @RequestParam(value = "letters", required = false) String letters,
             @RequestParam(value = "meaning", required = false) String meaning,
             @RequestParam(value = "department", required = false) String department) {
