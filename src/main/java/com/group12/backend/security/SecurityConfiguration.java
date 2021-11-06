@@ -41,8 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/abbreviations").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/abbreviations/**").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/abbreviations/DisLike").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/abbreviations/Like").permitAll();
+
 
 
         http.authorizeRequests().antMatchers(GET, "/api/users").hasAnyAuthority("ROLE_ADMIN");
@@ -53,9 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(PUT, "/api/abbreviations/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/abbreviations/**").hasAnyAuthority("ROLE_ADMIN");
 
+        http.authorizeRequests().antMatchers(GET, "/api/departments").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/departments").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/departments").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/abbreviations/**/GiveLike").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/abbreviations/**/GiveDisLike").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
 
         http.addFilter(customAuthenticationFilter);

@@ -118,7 +118,6 @@ public class Abbreviation {
 
     public void giveDislike() {
         likes--;
-
     }
 
 
