@@ -27,6 +27,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
 
     @Override
     public void saveAbbreviation(TempAbbreviation tempAbbreviation) {
+        tempAbbreviation.setDepartmentId(1);
         Abbreviation abbreviation = new Abbreviation(tempAbbreviation, departmentRepository.getById(tempAbbreviation.getDepartment()));
         Department department = departmentRepository.getById(tempAbbreviation.getDepartment());
         department.addAbbreviation(abbreviation);
@@ -55,40 +56,40 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     public List<TempAbbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
         List<Abbreviation> abbreviations = abbreviationRepository.findAll();
         List<Abbreviation> filteredAbbreviations = new ArrayList<>();
+
         System.out.println(letters+meaning+department);
 
         if (areAllNull(letters, meaning, department))
             throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
+        return  abrListToTAbrList(abbreviations);
 
-
-        for (Abbreviation abbreviation : abbreviations) {
-            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
-            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
-            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
-            System.out.println("test1");
-            if (areAllNotNull(letters, meaning, department)) {
-                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (areAllNotNull(meaning, department) && areAllNull(letters)) {
-                if (meaningIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (areAllNotNull(letters, department) && areAllNull(meaning)) {
-                if (lettersIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (areAllNotNull(department) && areAllNull(letters, meaning)) {
-                if (departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (areAllNotNull(letters) && areAllNull(meaning, department)) {
-                if (lettersIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (areAllNotNull(meaning) && areAllNull(letters, department)) {
-                if (meaningIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            }
-        }
-        System.out.println("test2");
-
-        return abrListToTAbrList(filteredAbbreviations);
+//        for (Abbreviation abbreviation : abbreviations) {
+//            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
+//            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
+//            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
+//            System.out.println("test1");
+//            if (areAllNotNull(letters, meaning, department)) {
+//                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            } else if (areAllNotNull(meaning, department) && areAllNull(letters)) {
+//                if (meaningIsIdentical && departmentIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            } else if (areAllNotNull(letters, department) && areAllNull(meaning)) {
+//                if (lettersIsIdentical && departmentIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            } else if (areAllNotNull(department) && areAllNull(letters, meaning)) {
+//                if (departmentIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            } else if (areAllNotNull(letters) && areAllNull(meaning, department)) {
+//                if (lettersIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            } else if (areAllNotNull(meaning) && areAllNull(letters, department)) {
+//                if (meaningIsIdentical)
+//                    filteredAbbreviations.add(abbreviation);
+//            }
+//        }
+//
+//        return abrListToTAbrList(filteredAbbreviations);
     }
 
     @Override

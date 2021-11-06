@@ -65,8 +65,8 @@ public class TempAbbreviation {
             return departmentId;
         }
 
-
-
-
+    public void setDepartmentId(long departmentId) {
+        this.departmentId = departmentId;
     }
+}
 
