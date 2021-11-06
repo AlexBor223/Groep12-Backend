@@ -2,19 +2,24 @@ package com.group12.backend.service;
 
 import com.group12.backend.exception.ResourceNotFoundException;
 import com.group12.backend.model.Abbreviation;
+import com.group12.backend.model.NullChecker;
 import com.group12.backend.repository.AbbreviationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class AbbreviationServiceImpl implements AbbreviationService {
-
     private AbbreviationRepository abbreviationRepository;
+    private NullChecker nullChecker;
 
     public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository) {
         this.abbreviationRepository = abbreviationRepository;
+        nullChecker = new NullChecker();
     }
 
     @Override
@@ -35,6 +40,44 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         } else {
             throw new ResourceNotFoundException("Abbreviation", "id", id);
         }
+    }
+
+    private boolean isAbbreviationValid(Abbreviation abbreviation, String letters, String meaning, String department) {
+        boolean equalsLetters = abbreviation.getLetters().equals(letters);
+        boolean equalsMeaning = abbreviation.getMeaning().equals(meaning);
+        boolean equalsDepartment = abbreviation.getDepartment().equals(department);
+
+        if (nullChecker.areAllNotNull(letters, meaning, department)) {
+            return equalsLetters && equalsMeaning && equalsDepartment;
+        } else if (nullChecker.areAllNotNull(meaning, department) && nullChecker.areAllNull(letters)) {
+            return equalsMeaning && equalsDepartment;
+        } else if (nullChecker.areAllNotNull(letters, department) && nullChecker.areAllNull(meaning)) {
+            return equalsLetters && equalsDepartment;
+        } else if (nullChecker.areAllNotNull(department) && nullChecker.areAllNull(letters, meaning)) {
+            return equalsDepartment;
+        } else if (nullChecker.areAllNotNull(letters) && nullChecker.areAllNull(meaning, department)) {
+            return equalsLetters;
+        } else if (nullChecker.areAllNotNull(meaning) && nullChecker.areAllNull(letters, department)) {
+            return equalsMeaning;
+        }
+
+        return false;
+    }
+
+    @Override
+    public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
+        List<Abbreviation> abbreviations = abbreviationRepository.findAll();
+        List<Abbreviation> filteredAbbreviations = new ArrayList<>();
+
+        if (areAllNull(letters, meaning, department))
+            throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
+
+        for (Abbreviation abbreviation : abbreviations) {
+            if (isAbbreviationValid(abbreviation, letters, meaning, department))
+                filteredAbbreviations.add(abbreviation);
+        }
+
+        return filteredAbbreviations;
     }
 
     @Override
@@ -80,4 +123,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.save(existingAbbreviation);
     }
 
+    public boolean areAllNull(Object... objects) {
+        return Stream.of(objects).allMatch(Objects::isNull);
+    }
 }

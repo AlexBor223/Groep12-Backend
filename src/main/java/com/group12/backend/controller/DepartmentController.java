@@ -27,6 +27,13 @@ public class DepartmentController {
         return departmentService.getAllDepartments();
     }
 
+    @GetMapping("filter")
+    public List<Department> getFilteredDepartments(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "letters", required = false) String letters) {
+        return departmentService.getFilteredDepartments(name, letters);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id) {
         return new ResponseEntity<>(departmentService.getDepartmentById(id), HttpStatus.OK);

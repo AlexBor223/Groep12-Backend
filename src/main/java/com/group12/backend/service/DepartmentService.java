@@ -9,5 +9,7 @@ public interface DepartmentService {
 
     List<Department> getAllDepartments();
 
+    List<Department> getFilteredDepartments(String name, String letters);
+
     Department getDepartmentById(long id);
 }
