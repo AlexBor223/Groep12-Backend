@@ -3,6 +3,13 @@ package com.group12.backend.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Department model contains data about departments of the Rijksoverheid.
+ *
+ * The data can be modified by making use of the setters, the data can be retrieved using the getters.
+ * The table annotation specifies which table correlates with this object.
+ */
+
 @Entity
 @Table(name = "department")
 public class Department {
@@ -54,15 +61,6 @@ public class Department {
         this.letters = letters;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Abbreviation abbreviation = (Abbreviation) o;
-//        return id == abbreviation.id && Objects.equals(letters, abbreviation.letters) &&
-//                Objects.equals(meaning, abbreviation.meaning);
-//    }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, name, letters);
@@ -70,7 +68,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Attribute{" +
+        return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", letters='" + letters + '\'' +
