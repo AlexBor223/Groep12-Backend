@@ -18,6 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     /**
      * Constructor for the DepartmentServiceImpl
      * @param departmentRepository
+     * @author Plinio
      */
     public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
@@ -29,6 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param id The department id
      * @return Department object
      * @throws ResourceNotFoundException
+     * @author Plinio
      */
     @Override
     public Department getDepartmentById(long id) {
@@ -46,6 +48,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param name
      * @param letters
      * @return boolean
+     * @author Plinio
      */
     private boolean isDepartmentValid(Department department, String name, String letters) {
         boolean equalsName = department.getName().equals(name);
@@ -67,6 +70,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param name
      * @param letters
      * @return List of departments
+     * @author Plinio
      */
     @Override
     public List<Department> getFilteredDepartments(String name, String letters) {
@@ -88,6 +92,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * Saves the department
      * @param department
      * @return department
+     * @author Plinio
      */
     @Override
     public Department saveDepartment(Department department) {
@@ -97,6 +102,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     /**
      * Gets all the departments
      * @return all departments
+     * @author Plinio
      */
     @Override
     public List<Department> getAllDepartments() {

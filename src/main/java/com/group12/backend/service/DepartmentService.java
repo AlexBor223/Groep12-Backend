@@ -8,6 +8,7 @@ import java.util.List;
  * The DepartmentService interface is used to group related methods with empty bodies.
  *
  * The interface is used by the DepartmentServiceImpl.
+ * @author Plinio
  */
 
 public interface DepartmentService {

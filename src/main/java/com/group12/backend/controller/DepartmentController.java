@@ -16,6 +16,7 @@ public class DepartmentController {
     /**
      * Constructor for the DepartmentController
      * @param departmentService
+     * @author Plinio
      */
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
@@ -25,6 +26,7 @@ public class DepartmentController {
      * Method to save the department and give a response
      * @param department
      * @return ResponseEntity
+     * @author Plinio
      */
     @PostMapping()
     public ResponseEntity<Department> saveDepartment(@RequestBody Department department) {
@@ -34,6 +36,7 @@ public class DepartmentController {
     /**
      * Method to get all the departments
      * @return list of all departments
+     * @author Plinio
      */
     @GetMapping
     public List<Department> getAllDepartments() {
@@ -45,6 +48,7 @@ public class DepartmentController {
      * @param name
      * @param letters
      * @return list with only the departments that match
+     * @author Plinio
      */
     @GetMapping("filter")
     public List<Department> getFilteredDepartments(
@@ -57,6 +61,7 @@ public class DepartmentController {
      * Method to get the department by id
      * @param id
      * @return ResponseEntity
+     * @author Plinio
      */
     @GetMapping("{id}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id) {

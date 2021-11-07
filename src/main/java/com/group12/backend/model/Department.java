@@ -8,6 +8,7 @@ import java.util.Objects;
  *
  * The data can be modified by making use of the setters, the data can be retrieved using the getters.
  * The table annotation specifies which table correlates with this object.
+ * @author Plinio
  */
 
 @Entity
