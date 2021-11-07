@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
+/**
+ * This is the main class that runs the Spring Boot application.
+ * The users are created if the CommandLineRunner bean is uncommented.
+ */
 @SpringBootApplication
 public class BackendApplication {
 
@@ -23,7 +27,6 @@ public class BackendApplication {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-//CREEER DE GEBRUIKERS (ALLEEN EEN KEER DRAAIEN DAARNA UITCOMMENTEN)
 //	@Bean
 //	CommandLineRunner run(UserService userService){
 //		return args -> {

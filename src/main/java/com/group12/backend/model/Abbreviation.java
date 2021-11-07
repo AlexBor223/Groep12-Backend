@@ -50,26 +50,50 @@ public class Abbreviation {
         this.meaning = meaning;
     }
 
+    /**
+     * Id getter
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Id setter
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Letters getter
+     * @return
+     */
     public String getLetters() {
         return letters;
     }
 
+    /**
+     * Letters setter
+     * @param letters
+     */
     public void setLetters(String letters) {
         this.letters = letters;
     }
 
+    /**
+     * Meaning getter
+     * @return
+     */
     public String getMeaning() {
         return meaning;
     }
 
+    /**
+     * Meaning setter
+     * @param meaning
+     */
     public void setMeaning(String meaning) {
         this.meaning = meaning;
     }
@@ -87,6 +111,10 @@ public class Abbreviation {
         return department;
     }
 
+    /**
+     * Department setter
+     * @param department
+     */
     public void setDepartment(Department department) {
         this.department = department;
     }
@@ -95,19 +123,35 @@ public class Abbreviation {
         this.approved = approved;
     }
 
+    /**
+     * Approved getter
+     * @return
+     */
     public Boolean getApproved() {
         return approved;
     }
 
 
+    /**
+     * Likes getter
+     * @return
+     */
     public int getLikes() {
         return likes;
     }
 
+    /**
+     * Likes setter
+     * @param likes
+     */
     public void setLikes(int likes) {
         this.likes = likes;
     }
 
+    /**
+     * If the likes of abbreviation is higher than 3
+     * Abbreviation is accepted
+     */
     public void giveLike() {
         likes++;
         if (likes > 3) {
@@ -116,15 +160,26 @@ public class Abbreviation {
     }
 
 
+    /**
+     * Gives an abbreviation -1 like.
+     */
     public void giveDislike() {
         likes--;
     }
 
 
+    /**
+     * approves an abbreviation
+     */
     private void acceptAbbreviation() {
         approved = true;
     }
 
+    /**
+     * equals function
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,11 +188,19 @@ public class Abbreviation {
         return id == abbreviation.id && Objects.equals(letters, abbreviation.letters) && Objects.equals(meaning, abbreviation.meaning);
     }
 
+    /**
+     * Hashcode function
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, letters, meaning);
     }
 
+    /**
+     * ToString function
+     * @return
+     */
     @Override
     public String toString() {
         return "Attribute{" +

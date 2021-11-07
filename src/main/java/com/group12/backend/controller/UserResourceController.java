@@ -26,6 +26,10 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * This class is to ass user, view all users, give users roles, make new roles
+ * and also generates a JWT token if refresh token is available if requested.
+ */
 @RestController
 @RequestMapping("/api")
 public class UserResourceController {
@@ -46,18 +50,35 @@ public class UserResourceController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
+    /**
+     * Save one user function
+     * @param role
+     * @return
+     */
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveUser(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
+    /**
+     * Add a single role to a single user function
+     * Add a role to a single user function
+     * @param form
+     * @return
+     */
     @PostMapping("/role/addtouser")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * generates a JWT token if refresh token is available if requested.
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -97,23 +118,41 @@ public class UserResourceController {
 
 }
 
-//TODO put in standalone class
+/**
+ * Getters and setters for usernames and rolenames
+ */
 class RoleToUserForm {
     private String username;
     private String roleName;
 
+    /**
+     * returns username
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * set username function
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * get role name
+     * @return
+     */
     public String getRoleName() {
         return roleName;
     }
 
+    /**
+     * set the role name
+     * @param roleName
+     */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
