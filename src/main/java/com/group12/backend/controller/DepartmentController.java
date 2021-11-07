@@ -13,20 +13,39 @@ import java.util.List;
 public class DepartmentController {
     private final DepartmentService departmentService;
 
+    /**
+     * Constructor for the DepartmentController
+     * @param departmentService
+     */
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
+    /**
+     * Method to save the department and give a response
+     * @param department
+     * @return ResponseEntity
+     */
     @PostMapping()
     public ResponseEntity<Department> saveDepartment(@RequestBody Department department) {
         return new ResponseEntity<>(departmentService.saveDepartment(department), HttpStatus.CREATED);
     }
 
+    /**
+     * Method to get all the departments
+     * @return list of all departments
+     */
     @GetMapping
     public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
+    /**
+     * Method to get filtered departments
+     * @param name
+     * @param letters
+     * @return list with only the departments that match
+     */
     @GetMapping("filter")
     public List<Department> getFilteredDepartments(
             @RequestParam(value = "name", required = false) String name,
@@ -34,6 +53,11 @@ public class DepartmentController {
         return departmentService.getFilteredDepartments(name, letters);
     }
 
+    /**
+     * Method to get the department by id
+     * @param id
+     * @return ResponseEntity
+     */
     @GetMapping("{id}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id) {
         return new ResponseEntity<>(departmentService.getDepartmentById(id), HttpStatus.OK);
