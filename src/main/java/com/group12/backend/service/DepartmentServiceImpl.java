@@ -1,10 +1,7 @@
 package com.group12.backend.service;
 
 import com.group12.backend.exception.ResourceNotFoundException;
-import com.group12.backend.model.Abbreviation;
-import com.group12.backend.model.Department;
-import com.group12.backend.model.TempAbbreviation;
-import com.group12.backend.model.TempDepartment;
+import com.group12.backend.model.*;
 import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 

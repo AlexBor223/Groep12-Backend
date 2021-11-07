@@ -52,6 +52,10 @@ public class Department {
         this.letters = letters;
     }
 
+    /**
+     * get the abbreviations
+     * @return
+     */
     public Set<Abbreviation> getAbbreviations() {
         return abbreviations;
     }
