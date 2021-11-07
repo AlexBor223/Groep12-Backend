@@ -12,26 +12,47 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * The implementation of AbbreviationService
+ */
 @Service
 public class AbbreviationServiceImpl implements AbbreviationService {
     private AbbreviationRepository abbreviationRepository;
     private NullChecker nullChecker;
 
+    /**
+     * The constructor with parameters
+     * @param abbreviationRepository
+     */
     public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository) {
         this.abbreviationRepository = abbreviationRepository;
         nullChecker = new NullChecker();
     }
 
+    /**
+     * Saves an abbreviation from abbreviationRepository
+     * @param abbreviation
+     * @return
+     */
     @Override
     public Abbreviation saveAbbreviation(Abbreviation abbreviation) {
         return abbreviationRepository.save(abbreviation);
     }
 
+    /**
+     * Get all the abbreviations from abbreviationRepository
+     * @return
+     */
     @Override
     public List<Abbreviation> getAllAbbreviations() {
         return abbreviationRepository.findAll();
     }
 
+    /**
+     * Get one abbreviation by id from abbreviationRepository
+     * @param id
+     * @return
+     */
     @Override
     public Abbreviation getAbbreviationById(long id) {
         Optional<Abbreviation> abbreviation = abbreviationRepository.findById(id);
@@ -42,6 +63,14 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         }
     }
 
+    /**
+     * Check if abbreviation is valid via nullChecker
+     * @param abbreviation
+     * @param letters
+     * @param meaning
+     * @param department
+     * @return
+     */
     private boolean isAbbreviationValid(Abbreviation abbreviation, String letters, String meaning, String department) {
         boolean equalsLetters = abbreviation.getLetters().equals(letters);
         boolean equalsMeaning = abbreviation.getMeaning().equals(meaning);
@@ -64,6 +93,13 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         return false;
     }
 
+    /**
+     * Get all the filtered abbreviations from abbreviationRepository
+     * @param letters
+     * @param meaning
+     * @param department
+     * @return
+     */
     @Override
     public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
         List<Abbreviation> abbreviations = abbreviationRepository.findAll();
@@ -80,6 +116,12 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         return filteredAbbreviations;
     }
 
+    /**
+     * update a abbreviation in
+     * @param abbreviation
+     * @param id
+     * @return
+     */
     @Override
     public Abbreviation updateAbbreviation(Abbreviation abbreviation, long id) {
         //Check whether abbreviation exists in db
@@ -92,6 +134,10 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         return existingAbbreviation;
     }
 
+    /**
+     * Delete abbreviation from abbreviationRepository
+     * @param id
+     */
     @Override
     public void deleteAbbreviation(long id) {
         //Check whether abbreviation exists in db
@@ -100,6 +146,10 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.deleteById(id);
     }
 
+    /**
+     * Like an abbreviation via abbreviationRepository
+     * @param id
+     */
     @Override
     public void likeAbbreviation(long id) {
         //Check whether abbreviation exists in db
@@ -109,6 +159,10 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.save(existingAbbreviation);
     }
 
+    /**
+     * Dislike an abbreviaton via abbreviationRepository
+     * @param id
+     */
     @Override
     public void dislikeAbbreviation(long id) {
         //Check whether abbreviation exists in db
@@ -123,6 +177,11 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.save(existingAbbreviation);
     }
 
+    /**
+     * check if all are null
+     * @param objects
+     * @return
+     */
     public boolean areAllNull(Object... objects) {
         return Stream.of(objects).allMatch(Objects::isNull);
     }

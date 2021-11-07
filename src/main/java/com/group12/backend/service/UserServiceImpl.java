@@ -43,17 +43,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    /**
+     * save a user to userRepository
+     * @param user
+     * @return
+     */
     @Override
     public AppUser saveUser(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
+    /**
+     * save a role to userRepository
+     * @param role
+     * @return
+     */
     @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }
 
+    /**
+     * Add a role to a user via userRepository and getting role
+     * from roleRepository
+     * @param username
+     * @param roleName
+     */
     @Override
     public void addRoleToUser(String username, String roleName) {
         AppUser user = userRepository.findByUsername(username);
@@ -61,11 +77,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.getRoles().add(role);
     }
 
+    /**
+     * Get a single user from userRepository
+     * @param username
+     * @return
+     */
     @Override
     public AppUser getUser(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Get all the users from userRepository
+     * @return
+     */
     @Override
     public List<AppUser> getUsers() {
         return userRepository.findAll();

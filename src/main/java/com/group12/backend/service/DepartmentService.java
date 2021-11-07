@@ -11,11 +11,32 @@ import java.util.List;
  */
 
 public interface DepartmentService {
+    /**
+     * Save a department
+     * @param department
+     * @return
+     */
     Department saveDepartment(Department department);
 
+    /**
+     * Get all the departments
+     * @return
+     */
     List<Department> getAllDepartments();
 
+    /**
+     * Get filtered departments
+     * @param name
+     * @param letters
+     * @return
+     */
     List<Department> getFilteredDepartments(String name, String letters);
 
+
+    /**
+     * Get a department by id
+     * @param id
+     * @return
+     */
     Department getDepartmentById(long id);
 }
