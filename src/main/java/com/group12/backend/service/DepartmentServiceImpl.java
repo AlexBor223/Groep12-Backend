@@ -98,18 +98,9 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @return all departments
      */
     @Override
-    public List<TempDepartment> getAllDepartments() {
+    public List<Department> getAllDepartments() {
 
-        return depListToTDepList(departmentRepository.findAll());
+        return departmentRepository.findAll();
     }
 
-
-    private  List<TempDepartment> depListToTDepList(List<Department> Departments){
-        List<TempDepartment> newList = new ArrayList<TempDepartment>(Departments.size());
-
-        for (Department abr : Departments) {
-            newList.add(new TempDepartment(abr));
-        }
-        return newList;
-    }
 }

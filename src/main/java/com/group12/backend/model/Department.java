@@ -2,7 +2,6 @@ package com.group12.backend.model;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Department model contains data about departments of the Rijksoverheid.
@@ -16,7 +15,7 @@ import java.util.Set;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long department;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -24,8 +23,7 @@ public class Department {
     @Column(name = "letters", nullable = false)
     private String letters;
 
-    @OneToMany(mappedBy="department")
-    private Set<Abbreviation> abbreviations;
+
 
     public Department() {
     }
@@ -47,33 +45,24 @@ public class Department {
      * @param letters
      */
     public Department(long id, String name, String letters) {
-        this.id = id;
+        this.department = id;
         this.name = name;
         this.letters = letters;
     }
 
-    /**
-     * get the abbreviations
-     * @return
-     */
-    public Set<Abbreviation> getAbbreviations() {
-        return abbreviations;
-    }
 
-    public void setAbbreviations(Set<Abbreviation> abbreviations) {
-        this.abbreviations = abbreviations;
-    }
 
-    public long getId() {
-        return id;
+
+    public long getDepartment() {
+        return department;
     }
 
     /**
      * Id setter
-     * @param id
+     * @param department
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setDepartment(long department) {
+        this.department = department;
     }
 
     /**
@@ -108,9 +97,6 @@ public class Department {
         this.letters = letters;
     }
 
-    public void addAbbreviation(Abbreviation abbreviation){
-        abbreviations.add(abbreviation);
-    }
 
 //    @Override
 //    public boolean equals(Object o) {
@@ -123,7 +109,7 @@ public class Department {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, letters);
+        return Objects.hash(department, name, letters);
     }
 
     /**
@@ -133,10 +119,9 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
+                "id=" + department +
                 ", name='" + name + '\'' +
-                ", letters='" + letters + '\'' +
-                ", abbreviations=" + abbreviations +
-                '}';
+                ", letters='" + letters + '\''
+                ;
     }
 }

@@ -2,8 +2,6 @@ package com.group12.backend.service;
 
 import com.group12.backend.exception.ResourceNotFoundException;
 import com.group12.backend.model.Abbreviation;
-import com.group12.backend.model.Department;
-import com.group12.backend.model.TempAbbreviation;
 import com.group12.backend.model.NullChecker;
 import com.group12.backend.repository.AbbreviationRepository;
 import com.group12.backend.repository.DepartmentRepository;
@@ -37,12 +35,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
      * @return
      */
     @Override
-    public void saveAbbreviation(TempAbbreviation tempAbbreviation) {
-        tempAbbreviation.setDepartmentId(1);
-        Abbreviation abbreviation = new Abbreviation(tempAbbreviation, departmentRepository.getById(tempAbbreviation.getDepartment()));
-        Department department = departmentRepository.getById(tempAbbreviation.getDepartment());
-        department.addAbbreviation(abbreviation);
-        departmentRepository.save(department);
+    public void saveAbbreviation(Abbreviation abbreviation) {
         abbreviationRepository.save(abbreviation);
     }
 
@@ -51,10 +44,10 @@ public class AbbreviationServiceImpl implements AbbreviationService {
      * @return
      */
     @Override
-    public List<TempAbbreviation> getAllAbbreviations() {
+    public List<Abbreviation> getAllAbbreviations() {
 
 
-        return abrListToTAbrList(abbreviationRepository.findAll());
+        return abbreviationRepository.findAll();
     }
 
     /**
@@ -110,43 +103,40 @@ public class AbbreviationServiceImpl implements AbbreviationService {
      * @return
      */
     @Override
-    public List<TempAbbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
+    public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
         List<Abbreviation> abbreviations = abbreviationRepository.findAll();
         List<Abbreviation> filteredAbbreviations = new ArrayList<>();
 
-        System.out.println(letters+meaning+department);
-
         if (areAllNull(letters, meaning, department))
             throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
-        return  abrListToTAbrList(abbreviations);
 
-//        for (Abbreviation abbreviation : abbreviations) {
-//            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
-//            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
-//            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
-//            System.out.println("test1");
-//            if (areAllNotNull(letters, meaning, department)) {
-//                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            } else if (areAllNotNull(meaning, department) && areAllNull(letters)) {
-//                if (meaningIsIdentical && departmentIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            } else if (areAllNotNull(letters, department) && areAllNull(meaning)) {
-//                if (lettersIsIdentical && departmentIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            } else if (areAllNotNull(department) && areAllNull(letters, meaning)) {
-//                if (departmentIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            } else if (areAllNotNull(letters) && areAllNull(meaning, department)) {
-//                if (lettersIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            } else if (areAllNotNull(meaning) && areAllNull(letters, department)) {
-//                if (meaningIsIdentical)
-//                    filteredAbbreviations.add(abbreviation);
-//            }
-//        }
-//
-//        return abrListToTAbrList(filteredAbbreviations);
+        for (Abbreviation abbreviation : abbreviations) {
+            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
+            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
+            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
+            System.out.println("test1");
+            if (nullChecker.areAllNotNull(letters, meaning, department)) {
+                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (nullChecker.areAllNotNull(meaning, department) && areAllNull(letters)) {
+                if (meaningIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (nullChecker.areAllNotNull(letters, department) && areAllNull(meaning)) {
+                if (lettersIsIdentical && departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (nullChecker.areAllNotNull(department) && areAllNull(letters, meaning)) {
+                if (departmentIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (nullChecker.areAllNotNull(letters) && areAllNull(meaning, department)) {
+                if (lettersIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            } else if (nullChecker.areAllNotNull(meaning) && areAllNull(letters, department)) {
+                if (meaningIsIdentical)
+                    filteredAbbreviations.add(abbreviation);
+            }
+        }
+
+        return filteredAbbreviations;
     }
 
     /**
@@ -210,14 +200,6 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         abbreviationRepository.save(existingAbbreviation);
     }
 
-    private  List<TempAbbreviation> abrListToTAbrList(List<Abbreviation> abbreviations){
-        List<TempAbbreviation> newList = new ArrayList<TempAbbreviation>(abbreviations.size());
-
-        for (Abbreviation abr : abbreviations) {
-            newList.add(new TempAbbreviation(abr));
-        }
-        return newList;
-    }
 
     public boolean areAllNull(Object... objects) {
         return Stream.of(objects).allMatch(Objects::isNull);

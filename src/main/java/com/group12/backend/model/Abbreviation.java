@@ -2,11 +2,11 @@ package com.group12.backend.model;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "Abbreviation")
 public class Abbreviation {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,8 @@ public class Abbreviation {
     @Column(name = "approved", nullable = false)
     private Boolean approved = false;
 
-    @ManyToOne
     @JoinColumn(name="department_id", nullable=true)
-    private Department department;
+    private Long department_id;
 
     public Abbreviation() {
 
@@ -36,13 +35,6 @@ public class Abbreviation {
         this.id = id;
         this.letters = letters;
         this.meaning = meaning;
-    }
-
-    public Abbreviation(TempAbbreviation tempAbbreviation, Department insertdepartment){
-        id= tempAbbreviation.getId();
-        letters= tempAbbreviation.getLetters();
-        meaning= tempAbbreviation.getMeaning();
-        department = insertdepartment;
     }
 
     public Abbreviation(String letters, String meaning) {
@@ -107,16 +99,16 @@ public class Abbreviation {
 //    }
 
 
-    public Department getDepartment() {
-        return department;
+    public Long getDepartment() {
+        return department_id;
     }
 
     /**
      * Department setter
      * @param department
      */
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment_id(Long department) {
+        this.department_id = department;
     }
 
     public void setApproved(Boolean approved) {
@@ -207,13 +199,11 @@ public class Abbreviation {
                 "id=" + id +
                 ", letters='" + letters + '\'' +
                 ", meaning='" + meaning + '\'' +
-                ", department='" + department + '\'' +
+                ", department='" + department_id + '\'' +
                 ", approved='" + approved + '\'' +
                 ", likes='" + likes + '\'' +
                 ", test='" + "likes" + '\'' +
                 '}';
     }
-
-
 
 }

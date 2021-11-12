@@ -2,7 +2,6 @@ package com.group12.backend.controller;
 
 import com.group12.backend.model.Abbreviation;
 import com.group12.backend.model.Department;
-import com.group12.backend.model.TempAbbreviation;
 import com.group12.backend.service.AbbreviationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +33,8 @@ public class AbbreviationController {
      */
     //REST API create abbreviation.
     @PostMapping()
-    public ResponseEntity<String> saveAbbreviation(@RequestBody TempAbbreviation abbreviation) {
+    public ResponseEntity<String> saveAbbreviation(@RequestBody Abbreviation abbreviation) {
+        System.out.println(abbreviation.toString());
          abbreviationService.saveAbbreviation(abbreviation);
          return new ResponseEntity<>("abbreviation added", HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class AbbreviationController {
      */
     //REST API get all abbreviations.
     @GetMapping
-    public List<TempAbbreviation> getAllAbbreviations() {
+    public List<Abbreviation> getAllAbbreviations() {
         return abbreviationService.getAllAbbreviations();
     }
 
@@ -56,7 +56,7 @@ public class AbbreviationController {
      * @return
      */
     @GetMapping("filter")
-    public List<TempAbbreviation> getFilteredAbbreviations(
+    public List<Abbreviation> getFilteredAbbreviations(
             @RequestParam(value = "letters", required = false) String letters,
             @RequestParam(value = "meaning", required = false) String meaning,
             @RequestParam(value = "department", required = false) String department) {
