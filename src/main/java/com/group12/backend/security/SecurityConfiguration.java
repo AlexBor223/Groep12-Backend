@@ -80,6 +80,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations/**/GiveLike").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/abbreviations/**/GiveDisLike").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/departments").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/highscores").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/highscores").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
 
         http.addFilter(customAuthenticationFilter);
