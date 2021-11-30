@@ -6,6 +6,7 @@ import com.group12.backend.model.NullChecker;
 import com.group12.backend.repository.AbbreviationRepository;
 import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
+import com.group12.backend.model.Department;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,39 +105,19 @@ public class AbbreviationServiceImpl implements AbbreviationService {
      */
     @Override
     public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
-        List<Abbreviation> abbreviations = abbreviationRepository.findAll();
-        List<Abbreviation> filteredAbbreviations = new ArrayList<>();
 
-        if (areAllNull(letters, meaning, department))
-            throw new ResourceNotFoundException("Abbreviations", "filter", "All parameters are null");
-
-        for (Abbreviation abbreviation : abbreviations) {
-            boolean lettersIsIdentical = abbreviation.getLetters().contains(letters);
-            boolean meaningIsIdentical = abbreviation.getMeaning().equals(meaning);
-            boolean departmentIsIdentical = abbreviation.getDepartment().equals(department);
-            System.out.println("test1");
-            if (nullChecker.areAllNotNull(letters, meaning, department)) {
-                if (lettersIsIdentical && meaningIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (nullChecker.areAllNotNull(meaning, department) && areAllNull(letters)) {
-                if (meaningIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (nullChecker.areAllNotNull(letters, department) && areAllNull(meaning)) {
-                if (lettersIsIdentical && departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (nullChecker.areAllNotNull(department) && areAllNull(letters, meaning)) {
-                if (departmentIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (nullChecker.areAllNotNull(letters) && areAllNull(meaning, department)) {
-                if (lettersIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            } else if (nullChecker.areAllNotNull(meaning) && areAllNull(letters, department)) {
-                if (meaningIsIdentical)
-                    filteredAbbreviations.add(abbreviation);
-            }
+        if(department==null && letters==null){
+            return abbreviationRepository.findAll();
         }
-
-        return filteredAbbreviations;
+        else if(letters == null){
+            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getDepartment());
+        }
+        else if(department == null){
+            return abbreviationRepository.getFilteredAbbreviations(letters);
+        }
+        else{
+            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getDepartment(), letters);
+        }
     }
 
     /**
