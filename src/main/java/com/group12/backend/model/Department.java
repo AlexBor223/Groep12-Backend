@@ -11,19 +11,17 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "Department")
+@Table(name = "Departments")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long department;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "letters", nullable = false)
     private String letters;
-
-
 
     public Department() {
     }
@@ -45,7 +43,7 @@ public class Department {
      * @param letters
      */
     public Department(long id, String name, String letters) {
-        this.department = id;
+        this.id = id;
         this.name = name;
         this.letters = letters;
     }
@@ -54,7 +52,7 @@ public class Department {
 
 
     public long getDepartment() {
-        return department;
+        return id;
     }
 
     /**
@@ -62,7 +60,7 @@ public class Department {
      * @param department
      */
     public void setDepartment(long department) {
-        this.department = department;
+        this.id = department;
     }
 
     /**
@@ -109,7 +107,7 @@ public class Department {
 
     @Override
     public int hashCode() {
-        return Objects.hash(department, name, letters);
+        return Objects.hash(id, name, letters);
     }
 
     /**
@@ -119,7 +117,7 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + department +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", letters='" + letters + '\''
                 ;
