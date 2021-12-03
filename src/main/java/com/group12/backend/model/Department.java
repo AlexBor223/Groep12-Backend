@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * Department model contains data about departments of the Rijksoverheid.
- *
+ * <p>
  * The data can be modified by making use of the setters, the data can be retrieved using the getters.
  * The table annotation specifies which table correlates with this object.
  */
@@ -28,6 +28,7 @@ public class Department {
 
     /**
      * Constructor with parameters
+     *
      * @param name
      * @param letters
      */
@@ -38,6 +39,7 @@ public class Department {
 
     /**
      * Constructor with parameters
+     *
      * @param id
      * @param name
      * @param letters
@@ -48,15 +50,13 @@ public class Department {
         this.letters = letters;
     }
 
-
-
-
     public long getDepartment() {
         return id;
     }
 
     /**
      * Id setter
+     *
      * @param department
      */
     public void setDepartment(long department) {
@@ -65,6 +65,7 @@ public class Department {
 
     /**
      * Name getter
+     *
      * @return
      */
     public String getName() {
@@ -73,6 +74,7 @@ public class Department {
 
     /**
      * Name setter
+     *
      * @param name
      */
     public void setName(String name) {
@@ -81,6 +83,7 @@ public class Department {
 
     /**
      * Letters getter
+     *
      * @return
      */
     public String getLetters() {
@@ -89,6 +92,7 @@ public class Department {
 
     /**
      * Letters setter
+     *
      * @param letters
      */
     public void setLetters(String letters) {
@@ -112,6 +116,7 @@ public class Department {
 
     /**
      * ToString function
+     *
      * @return
      */
     @Override

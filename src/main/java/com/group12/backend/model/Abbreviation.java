@@ -22,10 +22,10 @@ public class Abbreviation {
     private int likes = 0;
 
     @Column(name = "approved", nullable = false)
-    private Boolean approved = false;
+    private boolean approved = false;
 
-    @JoinColumn(name="department_id", nullable=true)
-    private Long department_id;
+    @JoinColumn(name = "department_id", nullable = true)
+    private long department_id;
 
     public Abbreviation() {
 
@@ -44,6 +44,7 @@ public class Abbreviation {
 
     /**
      * Id getter
+     *
      * @return
      */
     public long getId() {
@@ -52,6 +53,7 @@ public class Abbreviation {
 
     /**
      * Id setter
+     *
      * @param id
      */
     public void setId(long id) {
@@ -60,6 +62,7 @@ public class Abbreviation {
 
     /**
      * Letters getter
+     *
      * @return
      */
     public String getLetters() {
@@ -68,6 +71,7 @@ public class Abbreviation {
 
     /**
      * Letters setter
+     *
      * @param letters
      */
     public void setLetters(String letters) {
@@ -76,6 +80,7 @@ public class Abbreviation {
 
     /**
      * Meaning getter
+     *
      * @return
      */
     public String getMeaning() {
@@ -84,6 +89,7 @@ public class Abbreviation {
 
     /**
      * Meaning setter
+     *
      * @param meaning
      */
     public void setMeaning(String meaning) {
@@ -98,52 +104,30 @@ public class Abbreviation {
 //        this.department = department;
 //    }
 
-
-    public Long getDepartment() {
+    public long getDepartment() {
         return department_id;
     }
 
-    /**
-     * Department setter
-     * @param department
-     */
-    public void setDepartment_id(Long department) {
+    public void setDepartment_id(long department) {
         this.department_id = department;
     }
 
-    public void setApproved(Boolean approved) {
+    public void setApproved(boolean approved) {
         this.approved = approved;
     }
 
-    /**
-     * Approved getter
-     * @return
-     */
-    public Boolean getApproved() {
+    public boolean getApproved() {
         return approved;
     }
 
-
-    /**
-     * Likes getter
-     * @return
-     */
     public int getLikes() {
         return likes;
     }
 
-    /**
-     * Likes setter
-     * @param likes
-     */
     public void setLikes(int likes) {
         this.likes = likes;
     }
 
-    /**
-     * If the likes of abbreviation is higher than 3
-     * Abbreviation is accepted
-     */
     public void giveLike() {
         likes++;
         if (likes > 3) {
@@ -151,27 +135,14 @@ public class Abbreviation {
         }
     }
 
-
-    /**
-     * Gives an abbreviation -1 like.
-     */
     public void giveDislike() {
         likes--;
     }
 
-
-    /**
-     * approves an abbreviation
-     */
     private void acceptAbbreviation() {
         approved = true;
     }
 
-    /**
-     * equals function
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -180,19 +151,11 @@ public class Abbreviation {
         return id == abbreviation.id && Objects.equals(letters, abbreviation.letters) && Objects.equals(meaning, abbreviation.meaning);
     }
 
-    /**
-     * Hashcode function
-     * @return
-     */
     @Override
     public int hashCode() {
         return Objects.hash(id, letters, meaning);
     }
 
-    /**
-     * ToString function
-     * @return
-     */
     @Override
     public String toString() {
         return "Attribute{" +
