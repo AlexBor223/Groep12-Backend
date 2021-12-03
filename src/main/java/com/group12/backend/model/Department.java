@@ -13,6 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Departments")
 public class Department {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -50,7 +51,7 @@ public class Department {
         this.letters = letters;
     }
 
-    public long getDepartment() {
+    public long getid() {
         return id;
     }
 
@@ -59,7 +60,7 @@ public class Department {
      *
      * @param department
      */
-    public void setDepartment(long department) {
+    public void setid(long department) {
         this.id = department;
     }
 

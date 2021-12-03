@@ -2,13 +2,10 @@ package com.group12.backend.service;
 
 import com.group12.backend.exception.ResourceNotFoundException;
 import com.group12.backend.model.Abbreviation;
-import com.group12.backend.model.NullChecker;
 import com.group12.backend.repository.AbbreviationRepository;
 import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
-import com.group12.backend.model.Department;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,13 +51,13 @@ public class AbbreviationServiceImpl implements AbbreviationService {
             return abbreviationRepository.findAll();
         }
         else if(letters == null){
-            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getDepartment());
+            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getid());
         }
         else if(department == null){
             return abbreviationRepository.getFilteredAbbreviations(letters);
         }
         else{
-            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getDepartment(), letters);
+            return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getid(), letters);
         }
     }
 
