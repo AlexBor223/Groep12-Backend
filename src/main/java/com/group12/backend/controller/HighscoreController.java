@@ -1,7 +1,6 @@
 package com.group12.backend.controller;
 
 
-import com.group12.backend.model.Department;
 import com.group12.backend.model.Highscore;
 import com.group12.backend.service.HighscoreService;
 import org.springframework.http.HttpStatus;

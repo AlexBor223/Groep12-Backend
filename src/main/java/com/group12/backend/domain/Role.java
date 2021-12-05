@@ -14,45 +14,24 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //name of the role: Admin
     private String name;
 
-    /**
-     * Constructor without parameters.
-     */
     public Role() {
     }
 
-    /**
-     * Role constructor with parameters.
-     * @param id
-     * @param name
-     */
     public Role(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    /**
-     * Id getter
-     * @return
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     * Id setter
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Name getter
-     * @return
-     */
     public String getName() {
         return name;
     }

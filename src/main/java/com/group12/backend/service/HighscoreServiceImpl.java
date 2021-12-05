@@ -4,7 +4,6 @@ import com.group12.backend.model.Highscore;
 import com.group12.backend.repository.HighscoreRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

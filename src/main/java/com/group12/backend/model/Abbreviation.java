@@ -10,6 +10,7 @@ public class Abbreviation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "letters", nullable = false)
@@ -24,8 +25,8 @@ public class Abbreviation {
     @Column(name = "approved", nullable = false)
     private boolean approved = false;
 
-    @JoinColumn(name = "department_id", nullable = true)
-    private long department_id;
+    @JoinColumn(name = "departmentId", nullable = false)
+    private long departmentId;
 
     public Abbreviation() {
 
@@ -105,11 +106,11 @@ public class Abbreviation {
 //    }
 
     public long getDepartment() {
-        return department_id;
+        return departmentId;
     }
 
-    public void setDepartment_id(long department) {
-        this.department_id = department;
+    public void setDepartmentId(long department) {
+        this.departmentId = department;
     }
 
     public void setApproved(boolean approved) {
@@ -158,14 +159,13 @@ public class Abbreviation {
 
     @Override
     public String toString() {
-        return "Attribute{" +
+        return "Abbreviation{" +
                 "id=" + id +
                 ", letters='" + letters + '\'' +
                 ", meaning='" + meaning + '\'' +
-                ", department='" + department_id + '\'' +
+                ", departmentId='" + departmentId + '\'' +
                 ", approved='" + approved + '\'' +
                 ", likes='" + likes + '\'' +
-                ", test='" + "likes" + '\'' +
                 '}';
     }
 

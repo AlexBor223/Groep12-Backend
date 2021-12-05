@@ -3,25 +3,19 @@ package com.group12.backend.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * Department model contains data about departments of the Rijksoverheid.
- * <p>
- * The data can be modified by making use of the setters, the data can be retrieved using the getters.
- * The table annotation specifies which table correlates with this object.
- */
-
 @Entity
 @Table(name = "Departments")
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "letters", nullable = false)
+    @Column(name = "letters", nullable = true)
     private String letters;
 
     public Department() {

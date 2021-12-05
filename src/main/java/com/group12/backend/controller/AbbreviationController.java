@@ -1,13 +1,11 @@
 package com.group12.backend.controller;
 
 import com.group12.backend.model.Abbreviation;
-import com.group12.backend.model.Department;
 import com.group12.backend.service.AbbreviationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -104,7 +102,7 @@ public class AbbreviationController {
      * @return
      */
     //REST api give like to abbreviation
-    @PostMapping("{id}/GiveLike")
+    @PostMapping("{id}/Like")
     public ResponseEntity<String> likeAbbreviation(@PathVariable("id") long id) {
         abbreviationService.likeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);
@@ -115,7 +113,7 @@ public class AbbreviationController {
      * @param id
      * @return
      */
-    @PostMapping("{id}/GiveDisLike")
+    @PostMapping("{id}/Dislike")
     public ResponseEntity<String> dislikeAbbreviation(@PathVariable("id") long id) {
         abbreviationService.dislikeAbbreviation(id);
         return new ResponseEntity<String>("Abbreviation like given", HttpStatus.OK);

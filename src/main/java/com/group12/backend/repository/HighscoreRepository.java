@@ -4,7 +4,6 @@ package com.group12.backend.repository;
 import com.group12.backend.model.Highscore;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
