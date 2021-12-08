@@ -62,6 +62,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department saveDepartment(Department department) {
+        System.out.println("Department Id: " + department.getid());
         return departmentRepository.save(department);
     }
 
@@ -70,5 +71,4 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentRepository.findAll();
     }
-
 }

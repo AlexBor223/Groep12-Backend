@@ -7,15 +7,13 @@ import com.group12.backend.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class AbbreviationServiceImpl implements AbbreviationService {
 
-    private AbbreviationRepository abbreviationRepository;
-    private DepartmentRepository departmentRepository;
+    private final AbbreviationRepository abbreviationRepository;
+    private final DepartmentRepository departmentRepository;
 
     public AbbreviationServiceImpl(AbbreviationRepository abbreviationRepository, DepartmentRepository departmentRepository) {
         this.abbreviationRepository = abbreviationRepository;
@@ -40,23 +38,23 @@ public class AbbreviationServiceImpl implements AbbreviationService {
         if (abbreviation.isPresent()) {
             return abbreviation.get();
         } else {
-            throw new ResourceNotFoundException("Abbreviation", "id", id);
+            throw new ResourceNotFoundException("Abbreviation", "Id", id);
         }
     }
 
     @Override
     public List<Abbreviation> getFilteredAbbreviations(String letters, String meaning, String department) {
 
-        if(department==null && letters==null){
+        if (department == null && letters == null){
             return abbreviationRepository.findAll();
         }
-        else if(letters == null){
+        else if (letters == null){
             return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getid());
         }
-        else if(department == null){
+        else if (department == null){
             return abbreviationRepository.getFilteredAbbreviations(letters);
         }
-        else{
+        else {
             return abbreviationRepository.getFilteredAbbreviations(departmentRepository.findByName(department).getid(), letters);
         }
     }
@@ -65,11 +63,15 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     public Abbreviation updateAbbreviation(Abbreviation abbreviation, long id) {
         //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Employee", "id", id));
+                () -> new ResourceNotFoundException("Abbreviation", "Id", id));
         existingAbbreviation.setLetters(abbreviation.getLetters());
         existingAbbreviation.setMeaning(abbreviation.getMeaning());
+        existingAbbreviation.setDepartmentId(abbreviation.getDepartmentId());
+        existingAbbreviation.setApproved(abbreviation.getApproved());
+
         //Save to db
         abbreviationRepository.save(existingAbbreviation);
+
         return existingAbbreviation;
     }
 
@@ -85,7 +87,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     public void likeAbbreviation(long id) {
         //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Employee", "id", id));
+                () -> new ResourceNotFoundException("Abbreviation", "Id", id));
         existingAbbreviation.giveLike();
         abbreviationRepository.save(existingAbbreviation);
     }
@@ -94,7 +96,7 @@ public class AbbreviationServiceImpl implements AbbreviationService {
     public void dislikeAbbreviation(long id) {
         //Check whether abbreviation exists in db
         Abbreviation existingAbbreviation = abbreviationRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Employee", "id", id));
+                () -> new ResourceNotFoundException("Abbreviation", "Id", id));
         existingAbbreviation.giveDislike();
         if (existingAbbreviation.getLikes() < -9) {
             deleteAbbreviation(id);
@@ -102,9 +104,5 @@ public class AbbreviationServiceImpl implements AbbreviationService {
             return;
         }
         abbreviationRepository.save(existingAbbreviation);
-    }
-
-    public boolean areAllNull(Object... objects) {
-        return Stream.of(objects).allMatch(Objects::isNull);
     }
 }

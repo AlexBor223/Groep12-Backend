@@ -105,7 +105,7 @@ public class Abbreviation {
 //        this.department = department;
 //    }
 
-    public long getDepartment() {
+    public long getDepartmentId() {
         return departmentId;
     }
 

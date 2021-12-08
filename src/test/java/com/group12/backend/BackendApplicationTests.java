@@ -20,7 +20,7 @@ class BackendApplicationTests {
 	public void testAddAbbreviationSuccessShouldReturn201StatusCode() throws URISyntaxException
 	{
 		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:8080/api/abbreviations";
+		final String baseUrl = "http://49.12.228.20:8080/api/abbreviations";
 		URI uri = new URI(baseUrl);
 		Abbreviation abbreviation = new Abbreviation( "DVD", "Digital visual disk ofzo");
 
@@ -36,7 +36,7 @@ class BackendApplicationTests {
 	public void testAddDepartmentWithoutJWTShouldReturn403StatusCode() throws URISyntaxException
 	{
 		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:8080/api/departments";
+		final String baseUrl = "http://49.12.228.20/api/departments";
 		URI uri = new URI(baseUrl);
 		Department department = new Department("RandomAbbreviation", "ThisIsNotMeaningAnything");
 
